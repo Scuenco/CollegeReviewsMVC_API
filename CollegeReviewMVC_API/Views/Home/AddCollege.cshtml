@@ -1,0 +1,11 @@
+﻿@model CollegeReviewMVC_API.Model.College
+<h2>@ViewBag.Message</h2>
+
+<form method="post">
+
+    @Html.LabelFor(x => x.Name):
+    @Html.TextBoxFor(x => x.Name)
+
+    @Html.HiddenFor(x => x.CollegeId) <!--needed this for Edit College-->
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

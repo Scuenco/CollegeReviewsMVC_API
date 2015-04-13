@@ -1,0 +1,14 @@
+﻿@model CollegeReviewMVC_API.Model.Review
+<h2>@ViewBag.Message</h2>
+    @*<h3>@Model.College.Name</h3>*@
+<form method="post">
+    @Html.Label("Review: ")<br /> 
+    @Html.TextBoxFor(x => Model.Description)<br />
+    @Html.LabelFor(x => Model.Rating):<br />
+    @Html.EnumDropDownListFor(x => Model.Rating)<br /><br />
+
+    @Html.HiddenFor(x => Model.CollegeId)
+    @Html.HiddenFor(x => Model.ReviewId)
+    <button type="submit" class="well">Submit</button>
+</form>
+

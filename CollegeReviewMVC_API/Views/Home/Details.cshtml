@@ -1,0 +1,17 @@
+﻿@model CollegeReviewMVC_API.Model.College
+<h2>College Details</h2>
+<h3>@Model.Name</h3>
+@Html.ActionLink("Add a Review", "AddReview", new { id = Model.CollegeId }, new { @class = "btn btn-default" })
+@foreach (var r in Model.Reviews)
+{
+    <div class="well">
+        @Html.LabelFor(x => r.Description) @r.Description<br />
+        @Html.LabelFor(x => r.Rating) @r.Rating<br />
+        @Html.ActionLink("Edit", "EditReview", new { id = r.ReviewId })
+        @Html.ActionLink("Delete", "DeleteReview", new { id = r.ReviewId })
+    </div>
+}
+
+
+
+

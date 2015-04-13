@@ -1,0 +1,46 @@
+﻿@model List<CollegeReviewMVC_API.Model.College>
+<h2>List of Colleges</h2>
+
+@Html.ActionLink("Add College", "AddCollege", null, new { @class = "btn btn-default" })
+@foreach (var c in Model)
+{
+    <div class="well">
+        @Html.ActionLink(@c.Name, "Details", new { id = c.CollegeId })
+        @*Html.ActionLink("Details", "Details", new { id = c.CollegeId }, new { @class = "btn btn-default" })*@
+        @Html.ActionLink("Edit", "EditCollege", new { id = c.CollegeId }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Delete", "DeleteCollege", new { id = c.CollegeId }, new { @class = "btn btn-default" })
+    </div>
+}
+
+<!--WebApi-->
+<div ng-app="app">
+    <div ng-controller="HomeController">
+        <button class="btn btn-default" ng-click="isDisplayReviews = true">Display Reviews From WebAPI</button>
+        <div ng-show="isDisplayReviews" class="well">
+            <!--<button class="btn btn-default" ng-click="isAdding=true">Add Review</button>-->
+
+            <div class="well" ng-repeat="r in reviews">
+                {{r.Description}}<br />
+                Rating: {{r.Rating}}
+                <button class="btn btn-default" ng-click="isEditing=true">Edit</button>
+                <button class="btn btn-default" ng-click="deleteReview(r.ReviewId)">Delete</button>
+
+                <!--Show when editing-->
+                <div ng-show="isEditing" class="well" ng-cloak>
+                    Review: <input ng-model="eReview.Description" placeholder="Review" class="form-control" />
+                    Rating: <select ng-model="eReview.Rating" class="form-control">
+                        <option value="0" selected>-</option>
+                        <option value="1">Poor</option>
+                        <option value="2">Fair</option>
+                        <option value="3">Average</option>
+                        <option value="4">Good</option>
+                        <option value="5">Excellent</option>
+                    </select>
+                    <!--<input type="hidden" ng-model="eReview.ReviewId = r.ReviewId" />-->
+                    <!--<input ng-model="eReview.ReviewId = r.ReviewId" placeholder="ReviewId" class="form-control"/>-->
+                    <button class="btn btn-default" ng-click="eReview.ReviewId = r.ReviewId; editReview(eReview); isEditing=false">Submit</button><button class="btn btn-default" ng-click="isEditing=false">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
